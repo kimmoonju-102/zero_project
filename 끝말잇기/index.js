@@ -11,8 +11,27 @@ const onClickButton = () => {
     word = newWord; // 입력한 단어가 제시어가 된다.
     $word.textContent = word;
     $input.value = ''; // input 같은 입력값들은 value를 바꿔야 함.
+    cosnt order = parseInt($order.textContent); // 현재 순서
+    if (order + 1 > number) {
+      $order.textContent = 1;
+    } else {
+      $order.textContent = order + 1;
+    }
   } else {
     // 비어 있지 않다.
+    if (word[word.length -1] === newWord[0]) { // 올바른가
+      word = newWord; // 입력한 단어가 제시어가 된다.
+      $word.textContent = word;
+      $input.value = ''; // input 같은 입력값들은 value를 바꿔야 함.
+      cosnt order = parseInt($order.textContent); // 현재 순서
+      if (order + 1 > number) {
+        $order.textContent = 1;
+      } else {
+        $order.textContent = order + 1;
+      }
+    } else { // 올바르지 않은가
+
+    }
   }
 };
 
