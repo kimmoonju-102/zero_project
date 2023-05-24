@@ -7,7 +7,7 @@ let word; // 제시어
 let newWord; // 새로 입력한 단어
 
 const onClickButton = () => {
-  if (!word) { // 제시어가 비어 있는가?
+  if (!word || word[word.length - 1] === newWord[0]) { // 제시어가 비어 있는가?
     // 비어 있다.
     word = newWord; // 입력한 단어가 제시어가 된다.
     $word.textContent = word;
@@ -17,27 +17,11 @@ const onClickButton = () => {
     } else {
       $order.textContent = order + 1;
     }
-    $input.value = ''; // input 같은 입력값들은 value를 바꿔야 함.
-    $input.focus();
-  } else {
-    // 비어 있지 않다.
-    if (word[word.length -1] === newWord[0]) { // 올바른가
-      word = newWord; // 입력한 단어가 제시어가 된다.
-      $word.textContent = word;
-      const order = parseInt($order.textContent); // 현재 순서
-      if (order + 1 > number) {
-        $order.textContent = 1;
-      } else {
-        $order.textContent = order + 1;
-      }
-      $input.value = ''; // input 같은 입력값들은 value를 바꿔야 함.
-      $input.focus();
-    } else { // 올바르지 않은가
+  } else { // 올바르지 않은가
       alert('올바르지 않은 단어입니다');
-      $input.value = ''; // input 같은 입력값들은 value를 바꿔야 함.
-      $input.focus();
-    }
   }
+  $input.value = ''; // input 같은 입력값들은 value를 바꿔야 함.
+  $input.focus();
 };
 
 const onInput = (event) => {
