@@ -1,19 +1,24 @@
-const number = parseInt(prompt('몇 명이 참가하나요?'), 10);
-alert(number);
-const yesOrNo = confirm('맞나요?');
+const number = Number(prompt('몇 명이 참가하나요?'));
+const $button = document.querySelector('button');
+const $input = document.querySelector('input');
+const $word = document.querySelector( '#word' );
+let word; // 제시어
+let newWord; // 새로 입력한 단어
 
-document.querySelector('input').addEventListener('input', function() {
-  console.log('글자입력');
-});
-
-document.querySelector('button').addEventListener('click', function() {
-  console.log('클릭');
-});
-
-// 바깥으로 분리한 함수
-/* const onClickButton = () => {
-  console.log('버튼 클릭');
+const onClickButton = () => {
+  if (!word) { // 제시어가 비어 있는가?
+    // 비어 있다.
+    word = newWord; // 입력한 단어가 제시어가 된다.
+    $word.textContent = word;
+    $input.value = ''; // input 같은 입력값들은 value를 바꿔야 함.
+  } else {
+    // 비어 있지 않다.
+  }
 };
 
-const $button = document.querySelector('button');
-$button.addEventListener('click', onClickButton); */
+const onInput = (event) => {
+  newWord = event.target.value;
+};
+
+$button.addEventListener('click', onClickButton);
+$input.addEventListener('input', onInput);
