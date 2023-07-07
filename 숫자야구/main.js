@@ -7,7 +7,7 @@ for (let n = 0; n <= 9; n += 1) {
   numbers.push(n + 1);
 }
 const answer = [];
-for (let n = 0; n <= 4; n += 1) {
+for (let n = 0; n <= 3; n += 1) {
   const index = Math.floor(Math.random() * numbers.length); // numbers 길이
   answer.push(numbers[index]); 
   numbers.splice(index, 1);
@@ -34,6 +34,12 @@ function checkInput(input) {
   return true;
 }
 
+function defeated() {
+  const message = document.createTextNode(`패배! 정답은 ${answer.join('')}`);
+  $logs.appendChild(message);
+}
+
+let out = 0;
 $form.addEventListener('submit', (event) => {
   event.preventDefault();
   const value = $input.value; // value 변수에 저장하고
@@ -48,8 +54,7 @@ $form.addEventListener('submit', (event) => {
     return;
   }
   if (tries.length >= 9) {
-    const message = document.createTextNode(`패배! 정답은 ${answer.join('')}`);
-    $logs.appendChild(message);
+    defeated();
     return;
   }
   // 몇 스트라이크 몇 볼인지 검사
@@ -66,6 +71,15 @@ $form.addEventListener('submit', (event) => {
       }
     }
   }
-  $logs.append(`${value}: ${strike} 스트라이크 ${ball} 볼`, document.createElement('br'));
+  if(strike === 0 && ball === 0) {
+    out++;
+    $logs.append(`${value}:아웃`, document.createElement('br'));
+  }else {
+    $logs.append(`${value}:${strike} 스트라이크 ${ball} 볼`, document.createElement('br'));
+  }
+  if (out === 3) {
+    defeated();
+    return;
+  }
   tries.push(value); // 시도할때마다 tries에 기록
 });
