@@ -17,6 +17,28 @@ console.log(shuffle);
 }
 console.log(shuffle); */
 
-const winBall = shuffle.slice(0, 6).sort((a, b) => a - b); // 앞에서 6개 자르고 정렬
+const winBalls = shuffle.slice(0, 6).sort((a, b) => a - b); // 앞에서 6개 자르고 정렬
 const bonus = shuffle[6]; // 7번째 공 가져오기
-console.log(winBall, bonus);
+console.log(winBalls, bonus);
+
+
+// showBall 함수로 빼줌 (중복제거)
+const $result = document.querySelector('#result');
+const $bonus = document.querySelector('#bonus');
+
+const showBall = (number, $target) => {
+  const $ball = document.createElement('div');
+  $ball.className = 'ball';
+  $ball.textContent = number;
+  $target.appendChild($ball);
+};
+
+// [0, 1, 2, 3, 4, 5 ] -> [1000, 2000, 3000, 4000, 5000, 6000]
+for(let i = 0; i < 6; i++) { 
+  setTimeout(() => {
+    showBall(winBalls[i], $result); 
+  }, (i + 1) * 1000);
+}
+setTimeout(() => {
+  showBall(bonus, $bonus);
+}, 7000);
