@@ -24,21 +24,24 @@ console.log(winBalls, bonus);
 
 // showBall 함수로 빼줌 (중복제거)
 const $result = document.querySelector('#result');
-const $bonus = document.querySelector('#bonus');
 
-const showBall = (number, $target) => {
+const drawBall = (number, $parent) => {
   const $ball = document.createElement('div');
   $ball.className = 'ball';
   $ball.textContent = number;
-  $target.appendChild($ball);
+  $parent.appendChild($ball);
 };
 
 // [0, 1, 2, 3, 4, 5 ] -> [1000, 2000, 3000, 4000, 5000, 6000]
-for(let i = 0; i < 6; i++) { 
+for(let i = 0; i < winBalls.length; i++) { 
   setTimeout(() => {
-    showBall(winBalls[i], $result); 
+    console.log(winBalls[i], i);
+    drawBall(winBalls[i], $result); 
   }, (i + 1) * 1000);
 }
+
+const $bonus = document.querySelector('#bonus');
 setTimeout(() => {
-  showBall(bonus, $bonus);
+  drawBall(bonus, $bonus);
 }, 7000);
+ 
