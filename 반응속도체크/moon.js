@@ -30,10 +30,17 @@ $screen.addEventListener('click', (event) => {
     const average = records.reduce((a, c) => a + c) / records.length;
     endTime = new Date();
     $result.textContent = `현재 ${current}ms, 평균 : ${average}ms`;
+    const topFive = records.sort((p, c) => p - c).slice(0, 5);
+    topFive.forEach((top, index) => {
+      $result.append(
+        document.createElement('br'),
+        `${index + 1}위: ${top}ms`,
+      );
+    });
     startTime = null; // 초기화
     endTime = null; // 초기화
     $screen.classList.remove('now');
     $screen.classList.add('waiting');
     $screen.textContent = '클릭해서 시작하세요';
-  }
-})
+  };
+});
